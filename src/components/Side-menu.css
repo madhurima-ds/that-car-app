@@ -1,0 +1,13 @@
+.sideMenu {
+    display: block;
+}
+
+.sideMenu label {
+    font-weight: lighter;
+    font-size: large;
+}
+
+.sideMenu text {
+    font-weight: bold;
+    font-size: larger;
+}

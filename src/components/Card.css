@@ -1,0 +1,21 @@
+.card {
+    border-radius: 12px;
+    box-shadow: 0 1px 8px rgba(163, 160, 160, 0.519);
+    padding:5px;
+}
+
+.card:hover {
+    transform: translateY(-15px);
+    transition: transform 0.2s;
+    box-shadow: 0 2px 30px rgba(129, 123, 129, 0.438);
+  }
+
+.card img {
+    width: 20rem;
+    height: 10rem;
+    object-fit: cover;
+  }
+
+.card ul {
+    list-style-type: none;
+}  

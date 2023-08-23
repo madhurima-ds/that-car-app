@@ -1,0 +1,18 @@
+.filter {
+    display: flex;
+    padding-top: 20px;
+}
+
+.filter input {
+    height: 50px;
+    width: 1166px;
+    margin: 10px;
+    padding-left: 60px;
+    background-image: url('../assets/search.png');
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color:aliceblue;
+    border: 2px solid #e8e3e379;
+    outline: none;      
+}

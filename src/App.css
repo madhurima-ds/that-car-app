@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+body {
+  border-top: 40px solid rgb(9, 4, 67);
+  margin: 0;
+}
+
+p {
+  margin-right:5px;
+  position:relative;
+  float:center;
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: center;
+  color: gray;
+}
+
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.side {
+  flex: 1;
+  padding: 10px;
+}
+
+.main {
+  flex: 5;
+  background-color: white;
+  padding: 10px;
+}
