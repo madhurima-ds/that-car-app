@@ -24,11 +24,9 @@ const InventoryOutput = (props) => {
             setLastSet('rView3');
         }
         setOpenModal(true);
-        console.log("modal open", openModal);
     }
 
     const closeHandler = () => {
-        console.log("modal close", openModal);
         setOpenModal(false);
     }
 

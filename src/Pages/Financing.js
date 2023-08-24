@@ -1,5 +1,3 @@
-import { Outlet } from "react-router-dom";
-
 const Financing = () => {
     console.log("I am in Financing Page");
     return (

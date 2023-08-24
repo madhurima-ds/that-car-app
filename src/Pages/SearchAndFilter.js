@@ -3,7 +3,6 @@ import Filter from '../components/Filter';
 import SideMenu from '../components/Side-menu';
 
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
 
 
 const SearchAndFilter = (props) => {
