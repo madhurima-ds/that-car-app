@@ -7,8 +7,8 @@ import '../components/Image.css';
 
 const Home = (props) => {
 
-    let finalInvList = props.inventoryList.filter((car) => car.id === +localStorage.getItem("rView1")
-    || car.id === +localStorage.getItem("rView2") || car.id === +localStorage.getItem("rView3"));
+    let finalInvList = props.inventoryList.filter((car) => car.id === localStorage.getItem("rView1")
+    || car.id === localStorage.getItem("rView2") || car.id === localStorage.getItem("rView3"));
 
     return (
         <>
