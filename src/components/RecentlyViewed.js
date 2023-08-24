@@ -1,6 +1,5 @@
 import Output from '../components/InventoryOutput';
 import Card from '../components/Card';
-import Image from '../components/Image';
 
 import { Link } from 'react-router-dom';
 import '../components/RecentlyViewed.css';
@@ -17,8 +16,14 @@ const RecentlyViewed = (props) => {
                 <br/><br/>
                 <Output iList={props.finalInvList} name={props.carTitle}></Output> 
                 <div>
-                    <Card><Link to={props.link1}><Image logo={searchImg}></Image>
-                        </Link></Card>
+                    <Card>
+                        <Link to={props.link1}>
+                        <ul>
+                            <li><img src={searchImg} alt="searchImg"></img></li>
+                            <li><text style={{"font-size":"20px", "fontWeight":"bolder"}}>Search more cars</text></li>
+                        </ul>
+                        </Link>
+                    </Card>
                 </div>
             </div>
         </div>

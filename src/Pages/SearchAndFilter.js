@@ -39,7 +39,7 @@ return (
             { finalInvList && <Output iList={finalInvList} name={props.carTitle}></Output>}
             { finalInvList.length === 0 && <p>No cars found</p>}
          </div>
-         <div className="side" style={{"padding-right":"20px"}}>
+         <div className="side" style={{"paddingRight":"20px"}}>
            <SideMenu invList={invListSorted} onChange={() => checkBoxhandler}></SideMenu>
          </div>
        </div>
