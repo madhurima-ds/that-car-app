@@ -14,6 +14,7 @@ import bmwGold from '../src//assets/bmw-gold.png';
 import audiWhite from '../src/assets/Audi-white.png';
 import audiGold from '../src/assets/audi-gold.png';
 import hondaCivic from '../src/assets/hondaCivic.png';
+import audiBlack from '../src/assets/blackAudi.png';
 
 import Layout from '../src/components/Layout';
 

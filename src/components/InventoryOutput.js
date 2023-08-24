@@ -33,7 +33,7 @@ const InventoryOutput = (props) => {
     
     return (invList.map(car =>  
     <div className='inventoryOutput'>    
-    <Card onClick={() => onClickHandler(car.id)}>
+      <Card onClick={() => onClickHandler(car.id)}>
         <ul>
         <li> <img src={car.img} alt={car.id}></img></li>    
         <li><text style={{"color":"gray", "fontSize": "11px", "textTransform":"uppercase"}}>{props.name} CERTIFIED</text></li>    
@@ -43,8 +43,8 @@ const InventoryOutput = (props) => {
         <hr></hr>
         <li style={{"font-size": "13px"}}> <b>Free shipping</b> . Get it by tomorrow</li>
         </ul>
-    </Card>
-    { openModal && <Modal content={img} onClick={closeHandler}></Modal>}
+      </Card>
+      { openModal && <Modal content={img} onClick={closeHandler}></Modal>}
     </div>
     ));
 }
