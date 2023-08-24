@@ -1,7 +1,9 @@
+import React, { useState } from 'react';
 import { createBrowserRouter , RouterProvider } from 'react-router-dom';
 import Home from '../src/Pages/Home';
 import SearchAndFilter from './Pages/SearchAndFilter';
 import Financing from '../src/Pages/Financing';
+import Inventory from './Pages/Inventory';
 
 import classesCss from './App.css';
 
@@ -31,16 +33,25 @@ function App() {
     {id:4, img: audiGold, make: 'Audi', 'model': 'eTron', year: '2023', type: 'Chronos', mileage: '34,500', price: '62,999',color:'gold'},
     {id:8, img: hondaCivic, make: 'Honda', 'model': 'Civic', year: '2023', type: 'Sedan LX', mileage: '1000', price: '25,045',color:'red'}];
 
+  const [inventory, setInventory] = useState(inventoryList);
+
+  const updateInventoryHandler = (updatedInventory) => {
+    console.log("In App.js");
+    console.log(updatedInventory);
+    setInventory(updatedInventory);
+  }
+
   const router = createBrowserRouter([
     {
       path: "/", 
       element: <Layout carTitle={companyName} carTitleLogo={carTitleLogoPNG} cssClass={classesCss} 
-        text1='SEARCH CARS' text2='SELL/TRADE' text3='FINANCING' text4='SIGN-IN'
-        link1='/search' link2='/financing' link3='/financing' link4='/'/>,
+        text1='SEARCH CARS' text2='ADD INVENTORY' text3='FINANCING' text4='SIGN-IN'
+        link1='/search' link2='/inventory' link3='/financing' link4='/'/>,
       children:  [
         {path:"/", element: <Home inventoryList={inventoryList} carTitle={companyName}/>},
         {path: "/financing", element: <Financing/>},
-        {path: "/search", element: <SearchAndFilter carTitle={companyName} inventoryList={inventoryList}/>}
+        {path: "/search", element: <SearchAndFilter carTitle={companyName} inventoryList={inventory}/>},
+        {path: "/inventory", element: <Inventory onUpdate={updateInventoryHandler} carTitle={companyName} inventoryList={inventory}/>}
       ]
     }
    ]); 
