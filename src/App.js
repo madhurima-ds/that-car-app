@@ -10,7 +10,7 @@ import hondaAccord from '../src/assets/honda-accord-blue.png'
 import teslaModelS from '../src/assets/2018-tesla-modelS.png';
 import teslaWhite from '../src/assets/teslaWhite.png';
 import bmwBlue from '../src/assets/bmw-blue.png';
-import bmwGold from '../src//assets/bmw-gold.png';
+import bmwGold from '../src/assets/bmw-gold.png';
 import audiWhite from '../src/assets/Audi-white.png';
 import audiGold from '../src/assets/audi-gold.png';
 import hondaCivic from '../src/assets/hondaCivic.png';
