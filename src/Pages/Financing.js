@@ -1,7 +1,5 @@
 import { useState } from "react";
 import UserInput from "../components/Financing/UserInput";
-import financeHeaderCss from "../components/Financing/Finance.Header.css";
-import logo from "../assets/carTitle-logo.png";
 
 const Financing = () => {
   console.log("I am in Financing Page");
