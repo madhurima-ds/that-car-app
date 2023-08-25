@@ -4,6 +4,7 @@ import Home from '../src/Pages/Home';
 import SearchAndFilter from './Pages/SearchAndFilter';
 import Financing from '../src/Pages/Financing';
 import Inventory from './Pages/Inventory';
+import ErrorPage from './Pages/ErrorPage';
 
 import classesCss from './App.css';
 
@@ -16,7 +17,7 @@ import bmwGold from '../src/assets/bmw-gold.png';
 import audiWhite from '../src/assets/Audi-white.png';
 import audiGold from '../src/assets/audi-gold.png';
 import hondaCivic from '../src/assets/hondaCivic.png';
-import audiBlack from '../src/assets/blackAudi.png';
+import pageNotFound from '../src/assets/404.jpg';
 
 import Layout from '../src/components/Layout';
 
@@ -47,6 +48,7 @@ function App() {
       element: <Layout carTitle={companyName} carTitleLogo={carTitleLogoPNG} cssClass={classesCss} 
         text1='SEARCH CARS' text2='ADD INVENTORY' text3='FINANCING' text4='SIGN-IN'
         link1='/search' link2='/inventory' link3='/financing' link4='/'/>,
+      errorElement: <ErrorPage errorImg={pageNotFound}/>,
       children:  [
         {path:"/", element: <Home inventoryList={inventory} carTitle={companyName}/>},
         {path: "/financing", element: <Financing/>},
