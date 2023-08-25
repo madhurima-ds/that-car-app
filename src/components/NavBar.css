@@ -12,7 +12,8 @@
     color: rgb(2, 12, 104);
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.navbar a:active {
     font-weight: bold;
     text-decoration: none;
 }
