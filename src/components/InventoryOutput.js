@@ -1,39 +1,46 @@
 import Card from './Card';
-import Modal from '../components/Modal';
 import './InventoryOutput.css';
 
-import { useState } from 'react';
-
-import img from '../assets/under_construction.jpg';
+import { Link } from 'react-router-dom';
 
 const InventoryOutput = (props) => {
     const invList = props.iList;
 
-    const [lastSet, setLastSet] = useState('');
-    const [openModal, setOpenModal] = useState(false);
-
-    const onClickHandler = (id) => {        
-        if(lastSet === '' || lastSet === 'rView3') {
+    const onClickHandler = (id) => {    
+        if(!localStorage.getItem("rView1")) { // recently viewed history in localStorage is empty
             localStorage.setItem("rView1", id);
-            setLastSet('rView1');
-        } else if (lastSet === 'rView1') {
-            localStorage.setItem("rView2", id);
-            setLastSet('rView2');
-        } else if (lastSet === 'rView2') {
-            localStorage.setItem("rView3", id);
-            setLastSet('rView3');
+            localStorage.setItem("rViewLastChanged", "1");
+            return;
         }
-        setOpenModal(true);
+        
+        const lastChngd = localStorage.getItem("rViewLastChanged");
+
+        if(lastChngd === "1") {
+            addToRecentlyViewed("2", id);
+        } else if (lastChngd === "2") {
+            addToRecentlyViewed("3", id);
+        } else if (lastChngd === "3") {
+            addToRecentlyViewed("1", id);
+
+        }
     }
 
-    const closeHandler = () => {
-        setOpenModal(false);
-    }
+    const addToRecentlyViewed = (rView, id) => {
+        // Do not add the car if already added to the recent history.
+        if((localStorage.getItem("rView1") && localStorage.getItem("rView1") === id) 
+        || (localStorage.getItem("rView2") && localStorage.getItem("rView2") === id) 
+        || (localStorage.getItem("rView3") && localStorage.getItem("rView3") === id)) 
+        {
+            return;
+        }
 
+        localStorage.setItem("rView"+rView, id);
+        localStorage.setItem("rViewLastChanged", rView);
+    }
     
     return (invList.map(car =>  
-    <div className='inventoryOutput'>    
-      <Card onClick={() => onClickHandler(car.id)}>
+    <div className='inventoryOutput'>  
+      <Link to={`/details/${car.id}`}><Card onClick={() => onClickHandler(car.id)}>
         <ul>
         <li> <img src={car.img} alt={car.id}></img></li>    
         <li><text style={{"color":"gray", "fontSize": "11px", "textTransform":"uppercase"}}>{props.name} CERTIFIED</text></li>    
@@ -44,7 +51,7 @@ const InventoryOutput = (props) => {
         <li style={{"font-size": "13px"}}> <b>Free shipping</b> . Get it by tomorrow</li>
         </ul>
       </Card>
-      { openModal && <Modal content={img} onClick={closeHandler}></Modal>}
+      </Link>
     </div>
     ));
 }

@@ -5,6 +5,7 @@ import SearchAndFilter from './Pages/SearchAndFilter';
 import Financing from '../src/Pages/Financing';
 import Inventory from './Pages/Inventory';
 import ErrorPage from './Pages/ErrorPage';
+import DetailsPage from './Pages/DetailsPage';
 
 import classesCss from './App.css';
 
@@ -30,8 +31,8 @@ function App() {
     {id:'3', img: teslaWhite, make: 'Tesla', 'model': 'Model S', year: '2018', type: 'Electric', mileage: '42,000', price: '32,999', color: 'white'},
     {id:'7', img: bmwBlue, make: 'BMW', 'model': 'X3', year: '2021', type: 'sDrive30i', mileage: '2,000', price: '45,999',color:'blue'},
     {id:'5', img: bmwGold, make: 'BMW', 'model': '3 Series', year: '2023', type: '328i Gran Turismo Xdrive', mileage: '42,000', price: '22,999', color:'gold'},
-    {id:'6', img: audiWhite, make: 'Audi', 'model': 'TT', year: '2014', type: 'Quatro Premium', mileage: '82,000', price: '12,999',color:'white'},
-    {id:'4', img: audiGold, make: 'Audi', 'model': 'eTron', year: '2023', type: 'Chronos', mileage: '34,500', price: '62,999',color:'gold'},
+    {id:'6', img: audiWhite, make: 'Audi', 'model': 'eTron', year: '2014', type: 'Chronos', mileage: '82,000', price: '12,999',color:'white'},
+    {id:'4', img: audiGold, make: 'Audi', 'model': 'Quattro', year: '2023', type: 'Quatro Premium', mileage: '34,500', price: '62,999',color:'gold'},
     {id:'8', img: hondaCivic, make: 'Honda', 'model': 'Civic', year: '2023', type: 'Sedan LX', mileage: '1000', price: '25,045',color:'red'}];
 
   const [inventory, setInventory] = useState(inventoryList);
@@ -50,13 +51,15 @@ function App() {
         link1='/search' link2='/inventory' link3='/financing' link4='/'/>,
       errorElement: <ErrorPage errorImg={pageNotFound}/>,
       children:  [
-        {path:"/", element: <Home inventoryList={inventory} carTitle={companyName}/>},
+        {index: true, path:"/", element: <Home carTitle={companyName} inventoryList={inventory}/>},
         {path: "/financing", element: <Financing/>},
         {path: "/search", element: <SearchAndFilter carTitle={companyName} inventoryList={inventory}/>},
+        {path: "/details/:id", element: <DetailsPage carTitle={companyName} inventoryList={inventory}/>},
         {path: "/inventory", element: <Inventory onUpdate={updateInventoryHandler} carTitle={companyName} inventoryList={inventory}/>}
       ]
     }
    ]); 
+
   return (<RouterProvider router={router}/>);
 }
 

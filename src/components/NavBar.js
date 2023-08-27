@@ -1,14 +1,14 @@
-import './NavBar.css';
-import { Link, NavLink } from 'react-router-dom';
+import classes from './NavBar.css';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = (props) => {
     return (
         <div className='navbar'>
              <div>
-                <NavLink to={props.link1}>{props.text1}</NavLink>
-                <Link to={props.link2}>{props.text2}</Link>
-                <Link to={props.link3}>{props.text3}</Link>
-                <Link to={props.link4} style={{paddingLeft: "700px"}}>{props.text4}</Link>
+                <NavLink to={props.link1} className={({ isActive }) => isActive ? classes.active : undefined} end>{props.text1}</NavLink>
+                <NavLink to={props.link2} className={({ isActive }) => isActive ? {textDecoration: 'underline'} : undefined}>{props.text2}</NavLink>
+                <NavLink to={props.link3} className={({ isActive }) => isActive ? {textDecoration: 'underline'} : undefined}>{props.text3}</NavLink>
+                <NavLink to={props.link4} className={({ isActive }) => isActive ? {textDecoration: 'underline'} : undefined} style={{paddingLeft: "700px"}}>{props.text4}</NavLink>
             </div> 
         </div>
     );

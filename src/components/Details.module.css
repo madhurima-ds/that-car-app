@@ -1,0 +1,23 @@
+.button_getStarted {
+    position: absolute;
+    top: 30%;
+    left: 88%; 
+    font-family: verdana;
+    font-weight: bold;
+    font-size: 12px;
+    color:aliceblue; 
+    width: 180px;
+    transform: translate(-10%, -100%);
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color:forestgreen;
+    border: none;
+}
+
+.main_img {
+    width: 800px;
+    height: 500px;
+    padding-left: 25%;
+}

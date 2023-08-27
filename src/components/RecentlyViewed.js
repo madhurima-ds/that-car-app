@@ -20,7 +20,7 @@ const RecentlyViewed = (props) => {
                         <Link to={props.link1}>
                         <ul>
                             <li><img src={searchImg} alt="searchImg"></img></li>
-                            <li><text style={{"font-size":"20px", "fontWeight":"bolder"}}>Search more cars</text></li>
+                            <li><text style={{"fontSize":"20px", "fontWeight":"bolder"}}>Search more cars</text></li>
                         </ul>
                         </Link>
                     </Card>
