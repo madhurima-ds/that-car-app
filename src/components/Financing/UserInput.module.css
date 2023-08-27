@@ -1,9 +1,9 @@
 .form {
     padding: 1rem;
-    max-width: 30rem;
+    max-width: 60rem;
     margin: 2rem auto;
-    border-radius: 4px;
-    background: linear-gradient(180deg, #0c0f74, #88948f);
+    border-radius: 3px;
+   /* background: linear-gradient(180deg, #0c0f74, #88948f);*/
   }
   
   .input-group {
@@ -16,7 +16,7 @@
     display: block;
     margin-bottom: 0.25rem;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 1.0rem;
+    font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -27,7 +27,7 @@
     border: 1px solid #76c0ae;
     border-radius: 0.25rem;
     background-color: transparent;
-    color: #c2e9e0;
+    color: #359ab6;
     font-size: 1rem;
   }
   
