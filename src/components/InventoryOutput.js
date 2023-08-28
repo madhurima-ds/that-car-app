@@ -48,7 +48,7 @@ const InventoryOutput = (props) => {
         <li><span>{car.type} <b>.</b> {car.mileage} miles</span></li>
         <li><h2>${car.price}</h2></li>
         <hr></hr>
-        <li style={{"font-size": "13px"}}> <b>Free shipping</b> . Get it by tomorrow</li>
+        <li style={{"fontSize": "13px"}}> <b>Free shipping</b> . Get it by tomorrow</li>
         </ul>
       </Card>
       </Link>

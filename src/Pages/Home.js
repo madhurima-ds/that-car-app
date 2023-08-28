@@ -4,7 +4,6 @@ import Filter from '../components/Filter';
 import RecentlyViewed from '../components/RecentlyViewed';
 
 import '../components/Image.css';
-
 const Home = (props) => {
 
     let finalInvList = props.inventoryList.filter((car) => car.id === localStorage.getItem("rView1")
