@@ -1,6 +1,9 @@
 .navbar {
     display: inline-block;
-    padding: 30px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-right: 0px;
     width: 1400px;
 }
 
@@ -15,5 +18,5 @@
 .navbar a:hover,
 .navbar a:active {
     font-weight: bold;
-    text-decoration: none;
+    text-decoration:none;
 }

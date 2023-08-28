@@ -32,6 +32,7 @@ const SearchAndFilter = (props) => {
       
 return (
     <>
+       <div style={{paddingLeft: "20px", paddingTop:"20px"}}><text style={{ fontFamily:"verdana", fontSize:"15px", color:"gray"}}>{finalInvList.length} results</text></div>
        <Filter onSubmit={filterHandler}></Filter>
        <div className="row" >
          <div className="main">

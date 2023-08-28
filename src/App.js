@@ -6,6 +6,7 @@ import Financing from "./Pages/Financing";
 import PaymentCalc from "../src/Pages/PaymentCalculator";
 import Inventory from "./Pages/Inventory";
 import ErrorPage from "./Pages/ErrorPage";
+import DetailsPage from "./Pages/DetailsPage";
 
 import classesCss from "./App.css";
 
@@ -163,6 +164,12 @@ function App() {
           path: "/search",
           element: (
             <SearchAndFilter carTitle={companyName} inventoryList={inventory} />
+          ),
+        },
+        {
+          path: "/details/:id",
+          element: (
+            <DetailsPage carTitle={companyName} inventoryList={inventory} />
           ),
         },
         {

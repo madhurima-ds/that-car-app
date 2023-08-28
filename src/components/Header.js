@@ -1,7 +1,7 @@
 import Image from './Image';
 import './Header.css';
 import NavBar from './NavBar';
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
     return (
@@ -15,8 +15,7 @@ const Header = (props) => {
             text3={props.text3} link3={props.link3}
             text4={props.text4} link4={props.link4}
         ></NavBar>
-        </div>
-        <Outlet />
+        </div>      
         </>
     );
 }

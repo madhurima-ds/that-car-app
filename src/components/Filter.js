@@ -12,8 +12,8 @@ const Filter = (props) => {
     }
 
     return (
-        <div className='filter'>
-            <form onSubmit={submitHandler} autoComplete='off'>
+        <div className='filter' style={{paddingTop:"20px"}}>
+            <form onSubmit={submitHandler} autoComplete='off'>                
             <input type='search' name='filter' placeholder="Search by color or make" 
             ref={inputRef} style={props.style}></input>
             </form>
