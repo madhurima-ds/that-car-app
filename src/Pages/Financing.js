@@ -1,54 +1,34 @@
-import { useState } from "react";
-import UserInput from "../components/Financing/UserInput";
+import Output from "../components/Financing/FinanceInvOutput";
 
-const Financing = () => {
+const Financing = (props) => {
   console.log("I am in Financing Page");
-  const [userInput, setUserInput] = useState("");
-  const [monthlyPayment, setMonthlyPayment] = useState(0);
 
-  const calculateHandler = (userInput) => {
-    setUserInput(userInput);
-    if (userInput) {
-      const loanAmount = userInput["loan-amount"];
-      const interestRate = userInput["interest-rate"];
-      const duration = userInput["duration"];
-
-      function percentageToDecimal(percent) {
-        return percent / 12 / 100;
-      }
-      function yearsToMonths(year) {
-        return year * 12;
-      }
-
-      console.log(
-        percentageToDecimal(interestRate * loanAmount) /
-          (1 -
-            Math.pow(
-              1 + percentageToDecimal(interestRate),
-              -yearsToMonths(duration)
-            ))
-      );
-
-      setMonthlyPayment(
-        percentageToDecimal(interestRate * loanAmount) /
-          (1 -
-            Math.pow(
-              1 + percentageToDecimal(interestRate),
-              -yearsToMonths(duration)
-            ))
-      );
-    }
-    console.log(monthlyPayment);
-    return monthlyPayment;
-  };
+  /* Showing Inventory: Begin */
+  let invListSorted = props.inventoryList.sort((a, b) =>
+    a.id < b.id ? 1 : -1
+  );
+  /* Showing Inventory: End */
 
   return (
     <>
       <div>
         <h2 style={{ textAlign: "center", color: "gray" }}>
-          Finance Calculator
+          Choose your vehical to finance
         </h2>
-        <UserInput
+      </div>
+      <div className="main">
+        {invListSorted.length > 0 && (
+          <Output iList={invListSorted} name={props.carTitle}></Output>
+        )}
+        {invListSorted.length === 0 && <p>No cars found</p>}
+      </div>
+    </>
+  );
+};
+
+export default Financing;
+
+/*  <UserInput
           onCalculate={calculateHandler}
           monthlyPayment={parseFloat(monthlyPayment.toFixed(2))}
         />
@@ -57,9 +37,4 @@ const Financing = () => {
             No monthly payment calculated yet.
           </p>
         )}
-      </div>
-    </>
-  );
-};
-
-export default Financing;
+*/
