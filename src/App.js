@@ -7,6 +7,7 @@ import PaymentCalc from "../src/Pages/PaymentCalculator";
 import Inventory from "./Pages/Inventory";
 import ErrorPage from "./Pages/ErrorPage";
 import DetailsPage from "./Pages/DetailsPage";
+import HelpCenter from './Pages/HelpCenter';
 
 import classesCss from "./App.css";
 
@@ -25,6 +26,14 @@ import Layout from "../src/components/Layout";
 
 function App() {
   const companyName = "that car place";
+
+  const faqList = [
+    {id: 'faq1', question: 'How does That Car App determine the value of my vehicle?', answer: 'We combine the vehicle details you provide, such as options, accident history, and mileage, along with data from service records, trusted pricing guides, and our own market analysis. We analyze hundreds of data points to create a real offer, personalized for you. You’ll receive the strongest offer we can give based on our analysis of your vehicle’s value and current auto market conditions.'},
+    {id: 'faq2', question: 'What documents do I need to sell my car to That Car App?', answer: 'In most cases, we ask for photos of three items: your ID, your vehicle’s title, and odometer. We tailor what we request based on considerations unique to you and your car and don’t ask for anything we don’t need. We’ll request documents unique to your situation, like if you have a loan, a lease, or multiple title owners. We make it easy and secure to send documents right from your mobile phone or laptop. And we’re here to answer any questions you have along the way.'},
+    {id: 'faq3', question: 'If I sell my car to That Car App, how and when will I be paid?', answer: 'That Car App will pay you for your car at your pickup or drop-off appointment. We’ll either hand you a printed check or initiate payment via an ACH direct deposit into your checking or savings account (ACH transfers normally take between 2-5 business days). The appointment is fast – we simply confirm the basic details about your vehicle and complete final sale documents – ensuring you get paid as quickly as possible.'},
+    {id: 'faq4', question: 'How does That Car App handle options for pickup and drop-off?', answer: 'Depending on your location, we offer home appointments and meet-ups. Our appointments are fast and easy - we will take a quick look at your car to confirm the vehicle details, pass you a couple of papers to sign, and then pay you on the spot! There may be an additional fee for home pick up.'},
+    {id: 'faq5', question: 'Can I sell my vehicle to That Car App without buying a car from That Car App?', answer: 'Yes! You can absolutely sell us your car, even if you’re not ready to buy another car now. It’s an easy, online process to sell or trade-in your vehicle. We buy thousands of cars each week from customers like you.'},
+  ];
 
   const inventoryList = [
     {
@@ -120,7 +129,6 @@ function App() {
   const [inventory, setInventory] = useState(inventoryList);
 
   const updateInventoryHandler = (updatedInventory) => {
-    console.log("In App.js");
     console.log(updatedInventory);
     setInventory(updatedInventory);
   };

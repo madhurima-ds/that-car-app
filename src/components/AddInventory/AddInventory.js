@@ -90,6 +90,14 @@ const AddInventory = (props) => {
     resetFormValidation();
   };
 
+  const onCancelHandler = (event) => {
+    event.preventDefault();
+    resetFormValues();
+    resetFormValidation();
+    props.onCancel();
+  };
+
+
   const validateVinHandler = (event) => {    
     let isValid = false;
     if (event.target.value.trim().length === 13)
@@ -358,6 +366,7 @@ const AddInventory = (props) => {
         <div className={classes.new_vehicle__actions}>
           <button type="submit">Save</button>
           <button onClick={onResetHandler}>Reset</button>{" "}
+          <button onClick={onCancelHandler}>Cancel</button>{" "}
         </div>
       </form>
     </div>

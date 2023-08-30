@@ -1,9 +1,12 @@
+
+import { Link } from 'react-router-dom';
 import './Footer.css';
 const Footer = () => {
     return (
         <div className="footer">
             <ul>
-                <li><b>About That Car Place</b></li>
+                <li><b>Helpful Links</b></li>
+                <li><Link to="/helpcenter">Help Center</Link></li>
                 <li>About Us</li>
                 <li>Reviews</li>
                 <li>Careers</li>

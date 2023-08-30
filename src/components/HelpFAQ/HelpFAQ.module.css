@@ -1,0 +1,28 @@
+.help {
+    /* max-width: 60rem; */
+    /* width: 90%; */
+    /* max-width: 60%; */
+    text-align: left;
+
+    margin: auto;
+    width: 60%;
+}
+
+.help p {
+    color: midnightblue;
+}
+
+.help ul {
+    text-align: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.help li {
+    text-align: left;
+}
+
+.help li:hover {
+    cursor: pointer;
+}

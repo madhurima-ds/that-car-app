@@ -15,3 +15,14 @@
     color:aliceblue;
     padding-bottom: 80px;
 }
+
+.footer a {
+    color: aliceblue;
+    text-decoration-line: none;
+}
+
+.footer a:hover {
+    color: aliceblue;
+    font-weight: bold;
+    text-decoration-line: none;
+}

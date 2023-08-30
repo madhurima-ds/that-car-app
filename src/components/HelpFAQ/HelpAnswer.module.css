@@ -1,0 +1,9 @@
+.answer div {
+    margin: 10px 10px 10px 10px;    
+}
+
+.answer span {
+    font-size: medium;
+    font-weight:500;
+    color: gray;
+}
