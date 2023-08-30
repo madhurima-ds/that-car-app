@@ -3,23 +3,51 @@ import React, { useState } from "react";
 import InventoryOutput from "../components/InventoryOutput";
 import AddInventory from "../components/AddInventory/AddInventory";
 
+
+import classes from "../components/AddInventory/AddInventory.module.css";
+
 const Inventory = (props) => {
+  const [displayAddVehicle, setDisplayAddVehicle] = useState(false);
+
   const [inventory, setInventory] = useState(props.inventoryList);
 
-  const addInventoryHandler = (newVehicle) => {     
-    // *** Todo: Look into why the props.onUpdate(...) doesn't work in this scenario       
-    //setInventory((prevList) => {        
-      //return [newVehicle, ...prevList];
+  const addInventoryHandler = (newVehicle) => {
+    // *** Todo: Look into why the props.onUpdate(...) doesn't work in this scenario
+    //setInventory((prevList) => {
+    //return [newVehicle, ...prevList];
     //});
     //props.onUpdate(inventory);
-    const newInventory  = [newVehicle, ...inventory];
+    const newInventory = [newVehicle, ...inventory];
     setInventory(newInventory);
     props.onUpdate(newInventory);
   };
 
+  const showAddVehicleHandler = () => {
+    setDisplayAddVehicle(true);
+  };
+
+  const hideAddVehicleHandler = () => {
+    setDisplayAddVehicle(false);
+  };
+
   return (
-    <React.Fragment>        
-      <AddInventory onSave={addInventoryHandler} />
+    <React.Fragment>
+      {!displayAddVehicle && (
+        <div className={classes.new_vehicle}>
+          <button
+            className={classes.new_vehicle}
+            onClick={showAddVehicleHandler}
+          >
+            Add Vehicle
+          </button>
+        </div>
+      )}
+      {displayAddVehicle && (
+        <AddInventory
+          onSave={addInventoryHandler}
+          onCancel={hideAddVehicleHandler}
+        />
+      )}
       <div className="row">
         <div className="main">
           {props.inventoryList && (

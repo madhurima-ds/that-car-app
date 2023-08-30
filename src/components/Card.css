@@ -18,4 +18,20 @@
 
 .card ul {
     list-style-type: none;
-}  
+}
+
+.card-flat {
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(163, 160, 160, 0.519);
+  padding:5px;
+}
+
+.card-flat img {
+  width: 20rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.card-flat ul {
+  list-style-type: none;
+}

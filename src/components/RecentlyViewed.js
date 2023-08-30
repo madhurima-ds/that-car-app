@@ -16,7 +16,7 @@ const RecentlyViewed = (props) => {
                 <br/><br/>
                 <Output iList={props.finalInvList} name={props.carTitle}></Output> 
                 <div>
-                    <Card>
+                    <Card className='card'>
                         <Link to={props.link1}>
                         <ul>
                             <li><img src={searchImg} alt="searchImg"></img></li>

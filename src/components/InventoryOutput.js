@@ -40,7 +40,7 @@ const InventoryOutput = (props) => {
     
     return (invList.map(car =>  
     <div className='inventoryOutput'>  
-      <Link to={`/details/${car.id}`}><Card onClick={() => onClickHandler(car.id)}>
+      <Link to={`/details/${car.id}`}><Card className='card' onClick={() => onClickHandler(car.id)}>
         <ul>
         <li> <img src={car.img} alt={car.id}></img></li>    
         <li><text style={{"color":"gray", "fontSize": "11px", "textTransform":"uppercase"}}>{props.name} CERTIFIED</text></li>    
