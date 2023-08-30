@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from './HelpQuestion.module.css';
+import classes from "./HelpQuestion.module.css";
 
 const HelpQuestion = (props) => {
   return (
