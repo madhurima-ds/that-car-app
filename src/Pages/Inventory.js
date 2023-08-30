@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import InventoryOutput from "../components/InventoryOutput";
 import AddInventory from "../components/AddInventory/AddInventory";
-import Button from "../components/Button";
+
 
 import classes from "../components/AddInventory/AddInventory.module.css";
 
