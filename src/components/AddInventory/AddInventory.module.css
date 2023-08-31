@@ -1,4 +1,9 @@
 
+.inventory_menu {
+  margin-top: 1em;
+  text-align: center;
+}
+
 .new_vehicle {
     background-color: #ffffff;
     padding: 1rem;
@@ -10,7 +15,7 @@
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
   }
   
-  .new_vehicle button {
+  /* .new_vehicle button {
     font: inherit;
     cursor: pointer;
     padding: 0.5rem 2rem;
@@ -53,7 +58,7 @@
   .new_vehicle button.alternative:hover,
   .new_vehicle button.alternative:active {
     background-color: #ddb3f8;
-  }
+  } */
   
   .new_vehicle__controls {
     display: flex;
