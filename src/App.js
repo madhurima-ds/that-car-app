@@ -171,11 +171,9 @@ function App() {
           text1="SEARCH CARS"
           text2="INVENTORY"
           text3="FINANCING"
-          text4="SIGN-IN"
           link1="/search"
           link2="/inventory"
           link3="/financing"
-          link4="/"
           link5="/paymentcalculator"
         />
       ),

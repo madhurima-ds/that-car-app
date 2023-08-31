@@ -4,6 +4,7 @@ import classes from "./AddInventory.module.css";
 
 // Audi Black is our current default
 import defaultImage from '../../../src/assets/blackAudi.png';
+import Button from "../Button";
 
 const AddInventory = (props) => {
   const [validVin, setValidVin] = useState(undefined);
@@ -364,9 +365,12 @@ const AddInventory = (props) => {
           </div>
         </div>
         <div className={classes.new_vehicle__actions}>
-          <button type="submit">Save</button>
+          <Button type="submit">Save</Button>
+          <Button onClick={onResetHandler}>Reset</Button>
+          <Button onClick={onCancelHandler}>Cancel</Button>
+          {/* <button type="submit">Save</button>
           <button onClick={onResetHandler}>Reset</button>{" "}
-          <button onClick={onCancelHandler}>Cancel</button>{" "}
+          <button onClick={onCancelHandler}>Cancel</button>{" "} */}
         </div>
       </form>
     </div>

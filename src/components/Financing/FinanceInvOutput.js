@@ -32,7 +32,7 @@ const InventoryOutput = (props) => {
   return invList.map((car) => (
     <>
       <div className="inventoryOutput">
-        <Card onClick={() => onClickHandler(car)}>
+        <Card className='card' onClick={() => onClickHandler(car)}>
           <ul>
             <li>
               {" "}
