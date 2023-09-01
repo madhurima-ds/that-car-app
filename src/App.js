@@ -4,7 +4,7 @@ import Home from "../src/Pages/Home";
 import SearchAndFilter from "./Pages/SearchAndFilter";
 import Financing from "./Pages/Financing";
 import PaymentCalc from "../src/Pages/PaymentCalculator";
-import Inventory from "./Pages/Inventory";
+import InventoryPage from "./Pages/InventoryPage";
 import ErrorPage from "./Pages/ErrorPage";
 import DetailsPage from "./Pages/DetailsPage";
 import HelpCenter from "./Pages/HelpCenter";
@@ -208,11 +208,15 @@ function App() {
         {
           path: "/inventory",
           element: (
-            <Inventory
-              onUpdate={updateInventoryHandler}
-              carTitle={companyName}
+            <InventoryPage
               inventoryList={inventory}
-            />
+              onUpdate={updateInventoryHandler}
+            ></InventoryPage>
+            // <Inventory
+            //   onUpdate={updateInventoryHandler}
+            //   carTitle={companyName}
+            //   inventoryList={inventory}
+            // />
           ),
         },
         {

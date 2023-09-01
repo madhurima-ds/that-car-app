@@ -6,7 +6,6 @@ import React, {
   useContext,
 } from "react";
 
-import Panel from "../Panel";
 import Button from "../Button";
 import Input from "../Input";
 import ModalDialog from "../ModalDialog";
