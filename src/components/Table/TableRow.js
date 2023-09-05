@@ -14,7 +14,7 @@ const TableRow = (props) => {
       <div className={classes["resp-table-row"]} onClick={seletedRowHandler}>
         {row.map(
           (item) =>
-            item.isVisiable && (
+            item.isVisible && (
               <div className={classes["table-body-cell"]}>{item.value}</div>
             )
         )}

@@ -38,7 +38,7 @@ const Inventory = (props) => {
 
   const [displayAddVehicle, setDisplayAddVehicle] = useState(false);
   const [inventory, setInventory] = useState(inventoryList);
-  const [previewIsVisiable, setPreviewIsVisiable] = useState(false);
+  const [previewIsVisible, setPreviewIsVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(emptyItem);
 
   // Load the table data
@@ -47,28 +47,28 @@ const Inventory = (props) => {
 
     tableRow.push({
       value: <img src={item.img} alt={item.id} />,
-      isVisiable: true,
+      isVisible: true,
     });
-    tableRow.push({ value: item.id, isVisiable: true });
-    tableRow.push({ value: item.make, isVisiable: true });
-    tableRow.push({ value: item.model, isVisiable: true });
-    tableRow.push({ value: item.year, isVisiable: true });
-    tableRow.push({ value: item.type, isVisiable: true });
-    tableRow.push({ value: item.mileage, isVisiable: true });
-    tableRow.push({ value: item.color, isVisiable: true });
-    tableRow.push({ value: item.price, isVisiable: true });
-    tableRow.push({ value: item, isVisiable: false });
+    tableRow.push({ value: item.id, isVisible: true });
+    tableRow.push({ value: item.make, isVisible: true });
+    tableRow.push({ value: item.model, isVisible: true });
+    tableRow.push({ value: item.year, isVisible: true });
+    tableRow.push({ value: item.type, isVisible: true });
+    tableRow.push({ value: item.mileage, isVisible: true });
+    tableRow.push({ value: item.color, isVisible: true });
+    tableRow.push({ value: item.price, isVisible: true });
+    tableRow.push({ value: item, isVisible: false });
 
     tableData.push(tableRow);
   });
 
   const displayPreviewHandler = (selectedRow) => {
     setSelectedItem(selectedRow[selectedRow.length - 1].value);
-    setPreviewIsVisiable(true);
+    setPreviewIsVisible(true);
   };
 
   const hidePreviewHandler = () => {
-    setPreviewIsVisiable(false);
+    setPreviewIsVisible(false);
   };
 
   const addInventoryHandler = (newVehicle) => {
@@ -109,7 +109,7 @@ const Inventory = (props) => {
         tableData={tableData}
         onRowSelect={displayPreviewHandler}
       />
-      {previewIsVisiable && (
+      {previewIsVisible && (
         <InventoryPreview item={selectedItem} onClose={hidePreviewHandler} />
       )}
     </div>

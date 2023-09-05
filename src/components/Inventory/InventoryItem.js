@@ -6,14 +6,14 @@ import InventoryPreview from "./InventoryPreview";
 
 const InventoryItem = (props) => {
   const item = props.item;
-  const [previewIsVisiable, setPreviewIsVisiable] = useState(false);
+  const [previewIsVisible, setPreviewIsVisible] = useState(false);
 
   const displayPreviewHandler = () => {
-    setPreviewIsVisiable(true);
+    setPreviewIsVisible(true);
   };
 
   const hidePreviewHandler = () => {
-    setPreviewIsVisiable(false);
+    setPreviewIsVisible(false);
   };
 
   return (
@@ -34,7 +34,7 @@ const InventoryItem = (props) => {
         <div className={classes["table-body-cell"]}>{item.color}</div>
         <div className={classes["table-body-cell"]}>{item.price}</div>
       </div>
-      {previewIsVisiable && <InventoryPreview item={item} onClose={hidePreviewHandler} />}
+      {previewIsVisible && <InventoryPreview item={item} onClose={hidePreviewHandler} />}
     </Fragment>
   );
 };
