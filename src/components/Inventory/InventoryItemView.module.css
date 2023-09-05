@@ -1,0 +1,23 @@
+.inventory-view {
+    padding: 10px;
+    display: inline-flex;
+}
+
+.inventory-view a {
+    text-decoration: none;
+    color:black;
+}
+
+.inventory-view hr {
+    color:lightgray;
+}
+
+.inventory-view img {
+    width: 20rem;
+    height: 10rem;
+    object-fit: cover;
+ }
+  
+.inventory-view ul {
+    list-style-type: none;
+ }
