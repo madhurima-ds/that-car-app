@@ -1,0 +1,18 @@
+.resp-table-row{
+    display: table-row;
+}
+
+.resp-table-row:hover{
+    cursor: pointer;
+}
+
+.table-body-cell{
+    display: table-cell;
+    padding: 10px;    
+}
+
+.table-body-cell img {
+    width: 4rem;
+    height: 2rem;
+    object-fit: cover;    
+  }
