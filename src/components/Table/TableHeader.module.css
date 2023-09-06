@@ -1,0 +1,14 @@
+#resp-table-header {
+    display: table-header-group;
+    background-color: midnightblue;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+}
+
+.table-header-cell {
+    display: table-cell;
+    padding: 10px;
+    text-align: justify;
+    border-bottom: 1px solid black;
+}
