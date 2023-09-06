@@ -1,0 +1,13 @@
+#resp-table-footer {
+    display: table-footer-group;
+    background-color: midnightblue;
+    font-weight: bold;
+    font-size: 25px;    
+    }
+
+.table-footer-cell{
+    display: table-cell;
+    padding: 10px;
+    text-align: justify;
+    border-bottom: 1px solid black;
+    }
