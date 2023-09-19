@@ -8,11 +8,10 @@ const NavBar = (props) => {
 
   return (
     <div className="navbar">
-      <div>
+      {/* <div> */}
         <NavLink
           to={props.link1}
           className={({ isActive }) => (isActive ? classes.active : undefined)}
-          end
         >
           {props.text1}
         </NavLink>
@@ -20,7 +19,7 @@ const NavBar = (props) => {
           <NavLink
             to={props.link2}
             className={({ isActive }) =>
-              isActive ? { textDecoration: "underline" } : undefined
+              isActive ? classes.active : undefined
             }
           >
             {props.text2}
@@ -28,9 +27,7 @@ const NavBar = (props) => {
         )}
         <NavLink
           to={props.link3}
-          className={({ isActive }) =>
-            isActive ? { textDecoration: "underline" } : undefined
-          }
+          className={({ isActive }) => (isActive ? classes.active : undefined)}
         >
           {props.text3}
         </NavLink>
@@ -49,7 +46,7 @@ const NavBar = (props) => {
             </label>
           </Link>
         )}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

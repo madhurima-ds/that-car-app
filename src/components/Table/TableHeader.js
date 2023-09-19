@@ -8,7 +8,7 @@ const TableHeader = (props) => {
   return (
     <div id={classes["resp-table-header"]}>
       {columnHeaders.map((header) => (
-        <div className={classes["table-header-cell"]}>{header}</div>
+        <div className={classes["table-header-cell"]} key={Math.random()} >{header}</div>
       ))}
     </div>
   );

@@ -12,7 +12,7 @@
   padding-right: 20px;;
 }
 
-.header text {
+.header span {
   font-weight:bold;
   font-size:135%;
   font-style: normal;
@@ -31,5 +31,5 @@
 
 .header a:visited {
   color:midnightblue;
-  text-decoration-line: none;
+  /* text-decoration-line: none; */
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "../src/Pages/Home";
 import SearchAndFilter from "./Pages/SearchAndFilter";
@@ -19,10 +19,29 @@ import bmwBlue from "../src/assets/bmw-blue.png";
 import bmwGold from "../src/assets/bmw-gold.png";
 import audiWhite from "../src/assets/Audi-white.png";
 import audiGold from "../src/assets/audi-gold.png";
+import audiBlack from "../src/assets/blackAudi.png";
 import hondaCivic from "../src/assets/hondaCivic.png";
 import pageNotFound from "../src/assets/404.jpg";
 
 import Layout from "../src/components/Layout";
+
+const getImageLibrary = () => {
+  const library = new Map([
+    ["carTitleLogoPNG", carTitleLogoPNG],
+    ["hondaAccord", hondaAccord],
+    ["teslaModelS", teslaModelS],
+    ["teslaWhite", teslaWhite],
+    ["bmwBlue", bmwBlue],
+    ["bmwGold", bmwGold],
+    ["audiWhite", audiWhite],
+    ["audiGold", audiGold],
+    ["hondaCivic", hondaCivic],
+    ["audiBlack", audiBlack],
+    ["pageNotFound", pageNotFound],
+  ]);
+
+  return library;
+};
 
 function App() {
   const companyName = "that car place";
@@ -62,98 +81,136 @@ function App() {
     },
   ];
 
-  const inventoryList = [
-    {
-      id: "1",
-      img: hondaAccord,
-      make: "Honda",
-      model: "Accord",
-      year: "2022",
-      type: "Long-range",
-      mileage: "35,000",
-      price: "37,999",
-      color: "blue",
-    },
-    {
-      id: "2",
-      img: teslaModelS,
-      make: "Tesla",
-      model: "Model S",
-      year: "2023",
-      type: "Electric",
-      mileage: "22,000",
-      price: "52,999",
-      color: "red",
-    },
-    {
-      id: "3",
-      img: teslaWhite,
-      make: "Tesla",
-      model: "Model S",
-      year: "2018",
-      type: "Electric",
-      mileage: "42,000",
-      price: "32,999",
-      color: "white",
-    },
-    {
-      id: "7",
-      img: bmwBlue,
-      make: "BMW",
-      model: "X3",
-      year: "2021",
-      type: "sDrive30i",
-      mileage: "2,000",
-      price: "45,999",
-      color: "blue",
-    },
-    {
-      id: "5",
-      img: bmwGold,
-      make: "BMW",
-      model: "3 Series",
-      year: "2023",
-      type: "328i Gran Turismo Xdrive",
-      mileage: "42,000",
-      price: "22,999",
-      color: "gold",
-    },
-    {
-      id: "6",
-      img: audiWhite,
-      make: "Audi",
-      model: "TT",
-      year: "2014",
-      type: "Quatro Premium",
-      mileage: "82,000",
-      price: "12,999",
-      color: "white",
-    },
-    {
-      id: "4",
-      img: audiGold,
-      make: "Audi",
-      model: "eTron",
-      year: "2023",
-      type: "Chronos",
-      mileage: "34,500",
-      price: "62,999",
-      color: "gold",
-    },
-    {
-      id: "8",
-      img: hondaCivic,
-      make: "Honda",
-      model: "Civic",
-      year: "2023",
-      type: "Sedan LX",
-      mileage: "1000",
-      price: "25,045",
-      color: "red",
-    },
-  ];
+  // const inventoryList = [
+  //   {
+  //     id: "1",
+  //     img: hondaAccord,
+  //     make: "Honda",
+  //     model: "Accord",
+  //     year: "2022",
+  //     type: "Long-range",
+  //     mileage: "35,000",
+  //     price: "37,999",
+  //     color: "blue",
+  //   },
+  //   {
+  //     id: "2",
+  //     img: teslaModelS,
+  //     make: "Tesla",
+  //     model: "Model S",
+  //     year: "2023",
+  //     type: "Electric",
+  //     mileage: "22,000",
+  //     price: "52,999",
+  //     color: "red",
+  //   },
+  //   {
+  //     id: "3",
+  //     img: teslaWhite,
+  //     make: "Tesla",
+  //     model: "Model S",
+  //     year: "2018",
+  //     type: "Electric",
+  //     mileage: "42,000",
+  //     price: "32,999",
+  //     color: "white",
+  //   },
+  //   {
+  //     id: "7",
+  //     img: bmwBlue,
+  //     make: "BMW",
+  //     model: "X3",
+  //     year: "2021",
+  //     type: "sDrive30i",
+  //     mileage: "2,000",
+  //     price: "45,999",
+  //     color: "blue",
+  //   },
+  //   {
+  //     id: "5",
+  //     img: bmwGold,
+  //     make: "BMW",
+  //     model: "3 Series",
+  //     year: "2023",
+  //     type: "328i Gran Turismo Xdrive",
+  //     mileage: "42,000",
+  //     price: "22,999",
+  //     color: "gold",
+  //   },
+  //   {
+  //     id: "6",
+  //     img: audiWhite,
+  //     make: "Audi",
+  //     model: "TT",
+  //     year: "2014",
+  //     type: "Quatro Premium",
+  //     mileage: "82,000",
+  //     price: "12,999",
+  //     color: "white",
+  //   },
+  //   {
+  //     id: "4",
+  //     img: audiGold,
+  //     make: "Audi",
+  //     model: "eTron",
+  //     year: "2023",
+  //     type: "Chronos",
+  //     mileage: "34,500",
+  //     price: "62,999",
+  //     color: "gold",
+  //   },
+  //   {
+  //     id: "8",
+  //     img: hondaCivic,
+  //     make: "Honda",
+  //     model: "Civic",
+  //     year: "2023",
+  //     type: "Sedan LX",
+  //     mileage: "1000",
+  //     price: "25,045",
+  //     color: "red",
+  //   },
+  // ];
 
-  const [inventory, setInventory] = useState(inventoryList);
+  //const url = "http://localhost:8080/api/v1/vehicles/";
+  const url = "https://inventoryservices-thatcarplace.apps.prft-cps.zuvk.p1.openshiftapps.com/api/v1/vehicles/";
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  //const [inventory, setInventory] = useState(inventoryList);
+  const [inventory, setInventory] = useState([]);
+
+  const imageLibrary = useMemo(() => getImageLibrary(), []);
+
+  const loadInventoryHandler = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      console.log("Loading inventory...");
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Unable to retrieve vehicle inventory");
+      }
+      const data = await response.json();
+
+      const loadedInventory = [];
+      data.vehicles.forEach((element) => {
+        element.img = imageLibrary.get(element.imgName);
+        loadedInventory.push(element);
+      });
+
+      setInventory(loadedInventory);
+    } catch (error) {
+      setError(error.message);
+      console.log("Error occurred: " + error.message);
+    }
+    setIsLoading(false);
+  }, [imageLibrary]);
+
+  useEffect(() => {
+    loadInventoryHandler();
+  }, [loadInventoryHandler]);
 
   const updateInventoryHandler = (updatedInventory) => {
     console.log(updatedInventory);
@@ -210,6 +267,7 @@ function App() {
           element: (
             <InventoryPage
               inventoryList={inventory}
+              imageLibrary={imageLibrary}
               onUpdate={updateInventoryHandler}
             ></InventoryPage>
             // <Inventory

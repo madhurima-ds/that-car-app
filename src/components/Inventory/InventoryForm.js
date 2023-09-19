@@ -2,11 +2,11 @@ import React, { useState, useRef }  from 'react';
 
 import classes from "./InventoryForm.module.css";
 
-// Audi Black is our current default
-import defaultImage from '../../../src/assets/blackAudi.png';
 import Button from "../Button";
 
 const InventoryForm = (props) => {
+    const defaultImageName = 'audiBlack';
+
     const [validVin, setValidVin] = useState(undefined);
     const [validMake, setValidMake] = useState(undefined);
     const [validModel, setValidModel] = useState(undefined);
@@ -25,27 +25,27 @@ const InventoryForm = (props) => {
     const typeRef = useRef();
     const mileageRef = useRef();
     const colorRef = useRef();
-    const imgRef = useRef();
+    const imgNameRef = useRef();
     const priceRef = useRef();
   
-    const initialVehicle = {
-      id: "a1b2c3d4e5f6h7i8j",
-      img: null,
-      make: "BMW",
-      model: "X3",
-      year: "2021",
-      type: "sDrive30i",
-      mileage: "1,000",
-      price: "1.00",
-      color: "blue",
-    };
+    // const initialVehicle = {
+    //   vin: "a1b2c3d4e5f6h7i8j",
+    //   img: null,
+    //   make: "BMW",
+    //   model: "X3",
+    //   year: "2021",
+    //   type: "sDrive30i",
+    //   mileage: "1,000",
+    //   price: "1.00",
+    //   color: "blue",
+    // };
   
     const onSaveHandler = (event) => {
       event.preventDefault();
   
       if(formIsValid) {
         const newVehicle = {
-          id: vinRef.current.value,
+          vin: vinRef.current.value,
           make: makeRef.current.value,
           model: modelRef.current.value,
           year: yearRef.current.value,
@@ -53,7 +53,7 @@ const InventoryForm = (props) => {
           mileage: mileageRef.current.value,
           color: colorRef.current.value,
           price: priceRef.current.value,
-          img: defaultImage,
+          imgName: defaultImageName,
         };
   
         props.onSave(newVehicle);
@@ -71,7 +71,7 @@ const InventoryForm = (props) => {
       mileageRef.current.value = "";
       colorRef.current.value = "";
       priceRef.current.value = "";
-      imgRef.current.value = "";
+      imgNameRef.current.value = "";
     };
   
     const resetFormValidation = () => {
@@ -358,8 +358,7 @@ const InventoryForm = (props) => {
               <input
                 id="img"
                 type="text"
-                ref={imgRef}
-                value={initialVehicle.img}
+                ref={imgNameRef}                
                 disabled
               />
             </div>

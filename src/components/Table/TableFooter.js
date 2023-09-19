@@ -8,7 +8,7 @@ const TableFooter = (props) => {
   return (    
     <div id={classes["resp-table-footer"]}>
       {columnHeaders.map(() => (
-        <div className={classes["table-footer-cell"]} />
+        <div className={classes["table-footer-cell"]} key={Math.random()} />
       ))}      
     </div>
   );

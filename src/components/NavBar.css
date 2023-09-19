@@ -16,9 +16,9 @@
 }
 
 .navbar a:hover,
-.navbar a:active {
-    font-weight: bold;
-    text-decoration:none;
+.navbar a.active {
+    font-weight: bold;    
+    text-decoration: underline;
 }
 
 .navbar label {
@@ -30,8 +30,8 @@
 }
 
 .navbar label:hover,
-.navbar label:active {
+.navbar label.active {
     font-weight: bold;
     text-decoration:none;
     cursor: pointer;
-}
+} 

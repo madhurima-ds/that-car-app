@@ -39,12 +39,12 @@ const InventoryOutput = (props) => {
     }
     
     return (invList.map(car =>  
-    <div className='inventoryOutput'>  
+    <div className='inventoryOutput' key={car.id}>  
       <Link to={`/details/${car.id}`}><Card className='card' onClick={() => onClickHandler(car.id)}>
         <ul>
         <li> <img src={car.img} alt={car.id}></img></li>    
-        <li><text style={{"color":"gray", "fontSize": "11px", "textTransform":"uppercase"}}>{props.name} CERTIFIED</text></li>    
-        <li><text style={{"fontSize":"20px", "fontWeight":"bolder"}}>{car.year}  {car.make}  {car.model}</text> </li>
+        <li><span style={{"color":"gray", "fontSize": "11px", "textTransform":"uppercase"}}>{props.name} CERTIFIED</span></li>    
+        <li><span style={{"fontSize":"20px", "fontWeight":"bolder"}}>{car.year}  {car.make}  {car.model}</span> </li>
         <li><span>{car.type} <b>.</b> {car.mileage} miles</span></li>
         <li><h2>${car.price}</h2></li>
         <hr></hr>

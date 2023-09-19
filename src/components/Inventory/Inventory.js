@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import classes from "./Inventory.module.css";
 
@@ -10,9 +10,10 @@ import Table from "../Table/Table";
 
 const Inventory = (props) => {
   const inventoryList = props.inventoryList;
+  const imageLibrary = props.imageLibrary;
 
   const emptyItem = {
-    id: "",
+    vin: "",
     make: "",
     model: "",
     year: "",
@@ -42,14 +43,15 @@ const Inventory = (props) => {
   const [selectedItem, setSelectedItem] = useState(emptyItem);
 
   // Load the table data
-  inventoryList.forEach((item) => {
+  //inventoryList.forEach((item) => {
+  inventory.forEach((item) => {
     const tableRow = [];
 
     tableRow.push({
       value: <img src={item.img} alt={item.id} />,
       isVisible: true,
     });
-    tableRow.push({ value: item.id, isVisible: true });
+    tableRow.push({ value: item.vin, isVisible: true });
     tableRow.push({ value: item.make, isVisible: true });
     tableRow.push({ value: item.model, isVisible: true });
     tableRow.push({ value: item.year, isVisible: true });
@@ -71,15 +73,28 @@ const Inventory = (props) => {
     setPreviewIsVisible(false);
   };
 
-  const addInventoryHandler = (newVehicle) => {
-    // *** Todo: Look into why the props.onUpdate(...) doesn't work in this scenario
-    //setInventory((prevList) => {
-    //return [newVehicle, ...prevList];
-    //});
-    //props.onUpdate(inventory);
-    const newInventory = [newVehicle, ...inventory];
-    setInventory(newInventory);
-    props.onUpdate(newInventory);
+  const addInventoryHandler = async (newVehicle) => {
+    //const url = "http://localhost:8080/api/v1/vehicles/";
+    const url = "https://inventoryservices-thatcarplace.apps.prft-cps.zuvk.p1.openshiftapps.com/api/v1/vehicles/";
+
+    // to-do: could also add the error handling similar to the GET
+
+    const response = await fetch(url, {
+      method: "POST", // GET is default which is why we didn't specify it before
+      body: JSON.stringify(newVehicle),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    let savedVehicle = await response.json();
+
+    console.log(savedVehicle);
+    savedVehicle.img = imageLibrary.get(savedVehicle.imgName);
+
+    const updatedInventory = [savedVehicle, ...inventory];
+    setInventory(updatedInventory);
+    props.onUpdate(updatedInventory);
   };
 
   const showAddVehicleHandler = () => {
@@ -89,6 +104,10 @@ const Inventory = (props) => {
   const hideAddVehicleHandler = () => {
     setDisplayAddVehicle(false);
   };
+
+  useEffect(() => {
+    setInventory(inventoryList);
+  }, [inventoryList]);
 
   return (
     <div>
