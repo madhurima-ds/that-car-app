@@ -4,7 +4,7 @@ import classes from "./Inventory.module.css";
 
 import InventoryForm from "./InventoryForm";
 import InventoryPreview from "./InventoryPreview";
-import Button from "../Button";
+import Button from "../UI/Button";
 
 import Table from "../Table/Table";
 

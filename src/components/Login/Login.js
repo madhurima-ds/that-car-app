@@ -6,9 +6,9 @@ import React, {
   useContext,
 } from "react";
 
-import Button from "../Button";
-import Input from "../Input";
-import ModalDialog from "../ModalDialog";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
+import Modal from "../UI/Modal";
 import AuthContext from "../../store/auth-context";
 
 import classes from "./Login.module.css";
@@ -97,7 +97,7 @@ const Login = (props) => {
   };
 
   return (
-    <ModalDialog onClose={props.onClose}>
+    <Modal onClose={props.onClose}>
       {/* <Panel className={classes.login}> */}
       <div className={classes.login}>
         <form onSubmit={submitHandler}>
@@ -140,7 +140,7 @@ const Login = (props) => {
         </form>
         {/* </Panel> */}
       </div>
-    </ModalDialog>
+    </Modal>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Panel from "../Panel";
+import Panel from "../UI/Panel";
 
 import classes from './InventoryItemView.module.css';
 

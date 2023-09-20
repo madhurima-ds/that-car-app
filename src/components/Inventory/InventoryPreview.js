@@ -1,7 +1,7 @@
 import React from "react";
 
-import Button from "../Button";
-import ModalDialog from "../ModalDialog";
+import Button from "../UI/Button";
+import Modal from "../UI/Modal";
 import InventoryItemView from "./InventoryItemView";
 
 import classes from "./InventoryPreview.module.css";
@@ -12,12 +12,12 @@ const InventoryPreview = (props) => {
   };
 
   return (
-    <ModalDialog onClose={props.onClose}>
+    <Modal onClose={props.onClose}>
       <InventoryItemView item={props.item} />
       <div className={classes.preview}>
         <Button onClick={closeHandler}>Close</Button>
       </div>
-    </ModalDialog>
+    </Modal>
   );
 };
 

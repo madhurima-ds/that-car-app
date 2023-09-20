@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./InventoryList.module.css";
 
 import InventoryItem from "./InventoryItem";
-import Panel from "../Panel";
+import Panel from "../UI/Panel";
 
 const InventoryList = (props) => {
     const inventoryList = props.InventoryList

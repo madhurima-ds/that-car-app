@@ -2,7 +2,7 @@ import React, { useState, useRef }  from 'react';
 
 import classes from "./InventoryForm.module.css";
 
-import Button from "../Button";
+import Button from '../UI/Button';
 
 const InventoryForm = (props) => {
     const defaultImageName = 'audiBlack';

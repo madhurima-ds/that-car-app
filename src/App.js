@@ -270,11 +270,6 @@ function App() {
               imageLibrary={imageLibrary}
               onUpdate={updateInventoryHandler}
             ></InventoryPage>
-            // <Inventory
-            //   onUpdate={updateInventoryHandler}
-            //   carTitle={companyName}
-            //   inventoryList={inventory}
-            // />
           ),
         },
         {
