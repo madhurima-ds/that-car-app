@@ -1,5 +1,8 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { statusActions } from "./store/status";
+
 import Home from "../src/Pages/Home";
 import SearchAndFilter from "./Pages/SearchAndFilter";
 import Financing from "./Pages/Financing";
@@ -8,6 +11,7 @@ import InventoryPage from "./Pages/InventoryPage";
 import ErrorPage from "./Pages/ErrorPage";
 import DetailsPage from "./Pages/DetailsPage";
 import HelpCenter from "./Pages/HelpCenter";
+import Status from "./components/UI/Status";
 
 import classesCss from "./App.css";
 
@@ -172,22 +176,23 @@ function App() {
   //   },
   // ];
 
-  //const url = "http://localhost:8080/api/v1/vehicles/";
-  const url = "https://inventoryservices-thatcarplace.apps.prft-cps.zuvk.p1.openshiftapps.com/api/v1/vehicles/";
+  const isBusy = useSelector(state => state.status.isBusy);
+  const serverURL = useSelector(state => state.env.serverURL);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const [error, setError] = useState(null);
-  //const [inventory, setInventory] = useState(inventoryList);
   const [inventory, setInventory] = useState([]);
 
   const imageLibrary = useMemo(() => getImageLibrary(), []);
 
   const loadInventoryHandler = useCallback(async () => {
-    setIsLoading(true);
+    const url = serverURL + "/v1/vehicles";
+
+    dispatch(statusActions.showStatus("Loading..."));
     setError(null);
 
     try {
-      console.log("Loading inventory...");
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Unable to retrieve vehicle inventory");
@@ -205,7 +210,8 @@ function App() {
       setError(error.message);
       console.log("Error occurred: " + error.message);
     }
-    setIsLoading(false);
+    dispatch(statusActions.hideStatus());
+
   }, [imageLibrary]);
 
   useEffect(() => {
@@ -278,8 +284,13 @@ function App() {
         },
       ],
     },
-  ]);
-  return <RouterProvider router={router} />;
+  ]);  
+  return (
+    <>
+    <RouterProvider router={router} />
+    { isBusy && <Status />}
+    </>
+  );  
 }
 
 export default App;

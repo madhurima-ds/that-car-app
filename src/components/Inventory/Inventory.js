@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { statusActions } from "../../store/status";
 
 import classes from "./Inventory.module.css";
 
 import InventoryForm from "./InventoryForm";
 import InventoryPreview from "./InventoryPreview";
 import Button from "../UI/Button";
-
 import Table from "../Table/Table";
 
 const Inventory = (props) => {
+  const serverURL = useSelector((state) => state.env.serverURL);
+  const dispatch = useDispatch();
   const inventoryList = props.inventoryList;
   const imageLibrary = props.imageLibrary;
 
@@ -41,9 +44,9 @@ const Inventory = (props) => {
   const [inventory, setInventory] = useState(inventoryList);
   const [previewIsVisible, setPreviewIsVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(emptyItem);
+  const [error, setError] = useState(null);
 
   // Load the table data
-  //inventoryList.forEach((item) => {
   inventory.forEach((item) => {
     const tableRow = [];
 
@@ -74,27 +77,32 @@ const Inventory = (props) => {
   };
 
   const addInventoryHandler = async (newVehicle) => {
-    //const url = "http://localhost:8080/api/v1/vehicles/";
-    const url = "https://inventoryservices-thatcarplace.apps.prft-cps.zuvk.p1.openshiftapps.com/api/v1/vehicles/";
+    dispatch(statusActions.showStatus("Saving..."));
+    setError(null);
 
-    // to-do: could also add the error handling similar to the GET
+    const url = serverURL + "/v1/vehicles/";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(newVehicle),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const response = await fetch(url, {
-      method: "POST", // GET is default which is why we didn't specify it before
-      body: JSON.stringify(newVehicle),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+      let savedVehicle = await response.json();
 
-    let savedVehicle = await response.json();
+      console.log(savedVehicle);
+      savedVehicle.img = imageLibrary.get(savedVehicle.imgName);
 
-    console.log(savedVehicle);
-    savedVehicle.img = imageLibrary.get(savedVehicle.imgName);
-
-    const updatedInventory = [savedVehicle, ...inventory];
-    setInventory(updatedInventory);
-    props.onUpdate(updatedInventory);
+      const updatedInventory = [savedVehicle, ...inventory];
+      setInventory(updatedInventory);
+      props.onUpdate(updatedInventory);
+    } catch (error) {
+      setError(error);
+      console.log("Error occurred: " + error.message);
+    }
+    dispatch(statusActions.hideStatus());
   };
 
   const showAddVehicleHandler = () => {
