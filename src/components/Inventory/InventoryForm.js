@@ -5,7 +5,8 @@ import classes from "./InventoryForm.module.css";
 import Button from '../UI/Button';
 
 const InventoryForm = (props) => {
-    const defaultImageName = 'audiBlack';
+    const imageLibrary = props.imageLibrary;
+    const imageKeys = [...imageLibrary.keys()];
 
     const [validVin, setValidVin] = useState(undefined);
     const [validMake, setValidMake] = useState(undefined);
@@ -15,6 +16,7 @@ const InventoryForm = (props) => {
     const [validMileage, setValidMileage] = useState(undefined);
     const [validColor, setValidColor] = useState(undefined);
     const [validPrice, setValidPrice] = useState(undefined);
+    const [validImg, setValidImg] = useState(undefined);
   
     const [formIsValid, setFormIsValid] = useState(false);
   
@@ -53,7 +55,7 @@ const InventoryForm = (props) => {
           mileage: mileageRef.current.value,
           color: colorRef.current.value,
           price: priceRef.current.value,
-          imgName: defaultImageName,
+          imgName: imgNameRef.current.value,
         };
   
         props.onSave(newVehicle);
@@ -83,6 +85,7 @@ const InventoryForm = (props) => {
       setValidMileage(undefined);
       setValidColor(undefined);
       setValidPrice(undefined);
+      setValidImg(undefined);
     };
   
     const onResetHandler = (event) => {
@@ -113,7 +116,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
       //setFormIsValid(validVin && validMake && validModel && validYear && validType && validMileage && validColor && validPrice)
     };
@@ -132,7 +136,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -150,7 +155,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -168,7 +174,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -186,7 +193,8 @@ const InventoryForm = (props) => {
           isValid &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -204,7 +212,8 @@ const InventoryForm = (props) => {
           validType &&
           isValid &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
       
     };
@@ -223,7 +232,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           isValid &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -240,11 +250,34 @@ const InventoryForm = (props) => {
           validYear &&
           validType &&
           validMileage &&
+          validColor &&          
+          isValid &&
+          validImg 
+      );
+    };
+
+    const validateImageHandler = (event) => {
+      let isValid = false;
+      if (event.target.value.trim().length > 0) 
+        isValid = true;
+  
+      console.log(event.target.value);
+
+      setValidImg(isValid);
+      setFormIsValid(
+        validVin &&
+          validMake &&
+          validModel &&
+          validYear &&
+          validType &&
+          validMileage &&
           validColor &&
+          validPrice &&          
           isValid
       );
     };
-  
+
+
     return (
       <div className={classes["inventory-form"]}>
         <form onSubmit={onSaveHandler}>
@@ -353,14 +386,24 @@ const InventoryForm = (props) => {
                 onBlur={validatePriceHandler}
               />
             </div>
-            <div className={classes["inventory-form__control"]}>
+            <div
+              className={`${classes["inventory-form__control"]} ${
+                validImg === false ? classes.invalid : ""
+              }`}
+            >
               <label htmlFor="img">Image</label>
-              <input
+              <select
                 id="img"
                 type="text"
-                ref={imgNameRef}                
-                disabled
-              />
+                ref={imgNameRef}  
+                onBlur={validateImageHandler}
+              >
+                {
+                  imageKeys.map(key => (
+                    <option key={key} value={key}>{imageLibrary.get(key).name}</option>
+                  ))
+                }
+              </select>
             </div>
           </div>
           <div className={classes["inventory-form__actions"]}>

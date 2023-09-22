@@ -93,7 +93,7 @@ const Inventory = (props) => {
       let savedVehicle = await response.json();
 
       console.log(savedVehicle);
-      savedVehicle.img = imageLibrary.get(savedVehicle.imgName);
+      savedVehicle.img = imageLibrary.get(savedVehicle.imgName).image;
 
       const updatedInventory = [savedVehicle, ...inventory];
       setInventory(updatedInventory);
@@ -129,6 +129,7 @@ const Inventory = (props) => {
         <InventoryForm
           onSave={addInventoryHandler}
           onCancel={hideAddVehicleHandler}
+          imageLibrary={props.imageLibrary}
         />
       )}
       <Table

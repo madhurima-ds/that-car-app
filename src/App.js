@@ -31,17 +31,17 @@ import Layout from "../src/components/Layout";
 
 const getImageLibrary = () => {
   const library = new Map([
-    ["carTitleLogoPNG", carTitleLogoPNG],
-    ["hondaAccord", hondaAccord],
-    ["teslaModelS", teslaModelS],
-    ["teslaWhite", teslaWhite],
-    ["bmwBlue", bmwBlue],
-    ["bmwGold", bmwGold],
-    ["audiWhite", audiWhite],
-    ["audiGold", audiGold],
-    ["hondaCivic", hondaCivic],
-    ["audiBlack", audiBlack],
-    ["pageNotFound", pageNotFound],
+    ["carTitleLogoPNG", { name:"Logo", image: carTitleLogoPNG}],
+    ["hondaAccord", { name: "Blue Honda Accord", image: hondaAccord}],
+    ["teslaModelS", { name: "Red Telsa Model S", image: teslaModelS}],
+    ["teslaWhite", { name: "White Telsa Model S", image: teslaWhite}],
+    ["bmwBlue", { name: "Blue BMW X3", image: bmwBlue}],
+    ["bmwGold", { name: "Gold BMW 3 Series", image: bmwGold}],
+    ["audiWhite", { name: "White Audi TT", image: audiWhite}],
+    ["audiGold", { name: "Gold Audi eTron", image: audiGold}],
+    ["hondaCivic", { name: "Red Honda Civic", image: hondaCivic}],
+    ["audiBlack", { name: "Black Audi TT", image: audiBlack}],
+    ["pageNotFound", { name: "No Image", image: pageNotFound}],
   ]);
 
   return library;
@@ -201,7 +201,7 @@ function App() {
 
       const loadedInventory = [];
       data.vehicles.forEach((element) => {
-        element.img = imageLibrary.get(element.imgName);
+        element.img = imageLibrary.get(element.imgName).image;
         loadedInventory.push(element);
       });
 
