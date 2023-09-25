@@ -136,6 +136,8 @@ const Inventory = (props) => {
         columnHeaders={columnHeaders}
         tableData={tableData}
         onRowSelect={displayPreviewHandler}
+        tablewidth="98%"
+        tableheight="25rem"       
       />
       {previewIsVisible && (
         <InventoryPreview item={selectedItem} onClose={hidePreviewHandler} />
