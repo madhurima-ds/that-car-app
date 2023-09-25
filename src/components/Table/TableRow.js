@@ -15,7 +15,7 @@ const TableRow = (props) => {
         {row.map(
           (item) =>
             item.isVisible && (
-              <div className={classes["table-body-cell"]}>{item.value}</div>
+              <div className={classes["table-body-cell"]} key={Math.random()} >{item.value}</div>
             )
         )}
       </div>

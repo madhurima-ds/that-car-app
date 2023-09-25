@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { statusActions } from "../../store/status";
 
 import classes from "./Inventory.module.css";
 
 import InventoryForm from "./InventoryForm";
 import InventoryPreview from "./InventoryPreview";
-import Button from "../Button";
-
+import Button from "../UI/Button";
 import Table from "../Table/Table";
 
 const Inventory = (props) => {
+  const serverURL = useSelector((state) => state.env.serverURL);
+  const dispatch = useDispatch();
   const inventoryList = props.inventoryList;
+  const imageLibrary = props.imageLibrary;
 
   const emptyItem = {
-    id: "",
+    vin: "",
     make: "",
     model: "",
     year: "",
@@ -40,16 +44,17 @@ const Inventory = (props) => {
   const [inventory, setInventory] = useState(inventoryList);
   const [previewIsVisible, setPreviewIsVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(emptyItem);
+  const [error, setError] = useState(null);
 
   // Load the table data
-  inventoryList.forEach((item) => {
+  inventory.forEach((item) => {
     const tableRow = [];
 
     tableRow.push({
       value: <img src={item.img} alt={item.id} />,
       isVisible: true,
     });
-    tableRow.push({ value: item.id, isVisible: true });
+    tableRow.push({ value: item.vin, isVisible: true });
     tableRow.push({ value: item.make, isVisible: true });
     tableRow.push({ value: item.model, isVisible: true });
     tableRow.push({ value: item.year, isVisible: true });
@@ -71,15 +76,33 @@ const Inventory = (props) => {
     setPreviewIsVisible(false);
   };
 
-  const addInventoryHandler = (newVehicle) => {
-    // *** Todo: Look into why the props.onUpdate(...) doesn't work in this scenario
-    //setInventory((prevList) => {
-    //return [newVehicle, ...prevList];
-    //});
-    //props.onUpdate(inventory);
-    const newInventory = [newVehicle, ...inventory];
-    setInventory(newInventory);
-    props.onUpdate(newInventory);
+  const addInventoryHandler = async (newVehicle) => {
+    dispatch(statusActions.showStatus("Saving..."));
+    setError(null);
+
+    const url = serverURL + "/v1/vehicles/";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(newVehicle),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      let savedVehicle = await response.json();
+
+      console.log(savedVehicle);
+      savedVehicle.img = imageLibrary.get(savedVehicle.imgName).image;
+
+      const updatedInventory = [savedVehicle, ...inventory];
+      setInventory(updatedInventory);
+      props.onUpdate(updatedInventory);
+    } catch (error) {
+      setError(error);
+      console.log("Error occurred: " + error.message);
+    }
+    dispatch(statusActions.hideStatus());
   };
 
   const showAddVehicleHandler = () => {
@@ -89,6 +112,10 @@ const Inventory = (props) => {
   const hideAddVehicleHandler = () => {
     setDisplayAddVehicle(false);
   };
+
+  useEffect(() => {
+    setInventory(inventoryList);
+  }, [inventoryList]);
 
   return (
     <div>
@@ -102,12 +129,15 @@ const Inventory = (props) => {
         <InventoryForm
           onSave={addInventoryHandler}
           onCancel={hideAddVehicleHandler}
+          imageLibrary={props.imageLibrary}
         />
       )}
       <Table
         columnHeaders={columnHeaders}
         tableData={tableData}
         onRowSelect={displayPreviewHandler}
+        tablewidth="98%"
+        tableheight="25rem"       
       />
       {previewIsVisible && (
         <InventoryPreview item={selectedItem} onClose={hidePreviewHandler} />

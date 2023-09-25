@@ -10,7 +10,7 @@ const TableBody = (props) => {
   return (    
     <div id={classes["resp-table-body"]}>
       {tableData.map((row) => (
-        <TableRow row={row} onSelect={props.onRowSelect} />
+        <TableRow key={Math.random()} row={row} onSelect={props.onRowSelect} />
       ))}
     </div>
   );

@@ -2,13 +2,12 @@ import Output from '../components/InventoryOutput';
 import Filter from '../components/Filter';
 import SideMenu from '../components/Side-menu';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
-const SearchAndFilter = (props) => {
-      
-        let invListSorted = props.inventoryList.sort((a,b) => (a.id < b.id) ? 1 : -1); 
-      
+const SearchAndFilter = (props) => {      
+        let invListSorted = props.inventoryList.sort((a,b) => {return a.id - b.id});
+        //let invListSorted = props.inventoryList.sort((a,b) => (a.id < b.id) ? 1 : -1);                       
         const [finalInvList, setFinalInvList] = useState(invListSorted);
       
         const filterHandler = (filterString) => {
@@ -29,10 +28,14 @@ const SearchAndFilter = (props) => {
         const checkBoxhandler = (fElement) => {
           filterHandler(fElement.target.id);
         }
-      
+
+        useEffect(() => {        
+          setFinalInvList(invListSorted);
+        }, [invListSorted]);
+
 return (
     <>
-       <div style={{paddingLeft: "20px", paddingTop:"20px"}}><text style={{ fontFamily:"verdana", fontSize:"15px", color:"gray"}}>{finalInvList.length} results</text></div>
+       <div style={{paddingLeft: "20px", paddingTop:"20px"}}><span style={{ fontFamily:"verdana", fontSize:"15px", color:"gray"}}>{finalInvList.length} results</span></div>
        <Filter onSubmit={filterHandler}></Filter>
        <div className="row" >
          <div className="main">
@@ -40,7 +43,7 @@ return (
             { finalInvList.length === 0 && <p>No cars found</p>}
          </div>
          <div className="side" style={{"paddingRight":"20px"}}>
-           <SideMenu invList={invListSorted} onChange={() => checkBoxhandler}></SideMenu>
+           <SideMenu invList={invListSorted} onChange={() => checkBoxhandler}></SideMenu>           
          </div>
        </div>
     </>

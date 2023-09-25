@@ -12,7 +12,7 @@ const Home = (props) => {
     return (
         <>
         <div className='image'>
-            <text>Find your perfect car here</text>
+            <span>Find your perfect car here</span>
             <Filter style={{"position": "absolute", "top": "60%", "left": "50%", "transform": "translate(-50%, -200%)"}}></Filter>
             <img style={{"height":"700px", "width":"1520px"}} src={homePageImage} alt="homePageImage"/>
         </div>

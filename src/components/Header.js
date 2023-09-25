@@ -21,7 +21,7 @@ const Header = (props) => {
         <>
         <div className='header'>
         <Link><Image logo={props.carTitleLogo}></Image></Link>
-        <Link><text>{props.carTitle}</text></Link>
+        <Link><span>{props.carTitle}</span></Link>        
         <NavBar 
             text1={props.text1} link1={props.link1}
             text2={props.text2} link2={props.link2}

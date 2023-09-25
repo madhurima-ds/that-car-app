@@ -2,11 +2,12 @@ import React, { useState, useRef }  from 'react';
 
 import classes from "./InventoryForm.module.css";
 
-// Audi Black is our current default
-import defaultImage from '../../../src/assets/blackAudi.png';
-import Button from "../Button";
+import Button from '../UI/Button';
 
 const InventoryForm = (props) => {
+    const imageLibrary = props.imageLibrary;
+    const imageKeys = [...imageLibrary.keys()];
+
     const [validVin, setValidVin] = useState(undefined);
     const [validMake, setValidMake] = useState(undefined);
     const [validModel, setValidModel] = useState(undefined);
@@ -15,6 +16,7 @@ const InventoryForm = (props) => {
     const [validMileage, setValidMileage] = useState(undefined);
     const [validColor, setValidColor] = useState(undefined);
     const [validPrice, setValidPrice] = useState(undefined);
+    const [validImg, setValidImg] = useState(undefined);
   
     const [formIsValid, setFormIsValid] = useState(false);
   
@@ -25,27 +27,27 @@ const InventoryForm = (props) => {
     const typeRef = useRef();
     const mileageRef = useRef();
     const colorRef = useRef();
-    const imgRef = useRef();
+    const imgNameRef = useRef();
     const priceRef = useRef();
   
-    const initialVehicle = {
-      id: "a1b2c3d4e5f6h7i8j",
-      img: null,
-      make: "BMW",
-      model: "X3",
-      year: "2021",
-      type: "sDrive30i",
-      mileage: "1,000",
-      price: "1.00",
-      color: "blue",
-    };
+    // const initialVehicle = {
+    //   vin: "a1b2c3d4e5f6h7i8j",
+    //   img: null,
+    //   make: "BMW",
+    //   model: "X3",
+    //   year: "2021",
+    //   type: "sDrive30i",
+    //   mileage: "1,000",
+    //   price: "1.00",
+    //   color: "blue",
+    // };
   
     const onSaveHandler = (event) => {
       event.preventDefault();
   
       if(formIsValid) {
         const newVehicle = {
-          id: vinRef.current.value,
+          vin: vinRef.current.value,
           make: makeRef.current.value,
           model: modelRef.current.value,
           year: yearRef.current.value,
@@ -53,7 +55,7 @@ const InventoryForm = (props) => {
           mileage: mileageRef.current.value,
           color: colorRef.current.value,
           price: priceRef.current.value,
-          img: defaultImage,
+          imgName: imgNameRef.current.value,
         };
   
         props.onSave(newVehicle);
@@ -71,7 +73,7 @@ const InventoryForm = (props) => {
       mileageRef.current.value = "";
       colorRef.current.value = "";
       priceRef.current.value = "";
-      imgRef.current.value = "";
+      imgNameRef.current.value = "";
     };
   
     const resetFormValidation = () => {
@@ -83,6 +85,7 @@ const InventoryForm = (props) => {
       setValidMileage(undefined);
       setValidColor(undefined);
       setValidPrice(undefined);
+      setValidImg(undefined);
     };
   
     const onResetHandler = (event) => {
@@ -113,7 +116,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
       //setFormIsValid(validVin && validMake && validModel && validYear && validType && validMileage && validColor && validPrice)
     };
@@ -132,7 +136,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -150,7 +155,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -168,7 +174,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -186,7 +193,8 @@ const InventoryForm = (props) => {
           isValid &&
           validMileage &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -204,7 +212,8 @@ const InventoryForm = (props) => {
           validType &&
           isValid &&
           validColor &&
-          validPrice
+          validPrice &&
+          validImg
       );
       
     };
@@ -223,7 +232,8 @@ const InventoryForm = (props) => {
           validType &&
           validMileage &&
           isValid &&
-          validPrice
+          validPrice &&
+          validImg
       );
     };
   
@@ -240,11 +250,34 @@ const InventoryForm = (props) => {
           validYear &&
           validType &&
           validMileage &&
+          validColor &&          
+          isValid &&
+          validImg 
+      );
+    };
+
+    const validateImageHandler = (event) => {
+      let isValid = false;
+      if (event.target.value.trim().length > 0) 
+        isValid = true;
+  
+      console.log(event.target.value);
+
+      setValidImg(isValid);
+      setFormIsValid(
+        validVin &&
+          validMake &&
+          validModel &&
+          validYear &&
+          validType &&
+          validMileage &&
           validColor &&
+          validPrice &&          
           isValid
       );
     };
-  
+
+
     return (
       <div className={classes["inventory-form"]}>
         <form onSubmit={onSaveHandler}>
@@ -353,15 +386,24 @@ const InventoryForm = (props) => {
                 onBlur={validatePriceHandler}
               />
             </div>
-            <div className={classes["inventory-form__control"]}>
+            <div
+              className={`${classes["inventory-form__control"]} ${
+                validImg === false ? classes.invalid : ""
+              }`}
+            >
               <label htmlFor="img">Image</label>
-              <input
+              <select
                 id="img"
                 type="text"
-                ref={imgRef}
-                value={initialVehicle.img}
-                disabled
-              />
+                ref={imgNameRef}  
+                onBlur={validateImageHandler}
+              >
+                {
+                  imageKeys.map(key => (
+                    <option key={key} value={key}>{imageLibrary.get(key).name}</option>
+                  ))
+                }
+              </select>
             </div>
           </div>
           <div className={classes["inventory-form__actions"]}>

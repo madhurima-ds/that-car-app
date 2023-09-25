@@ -1,7 +1,7 @@
 import React, { Fragment} from "react";
 import Inventory from "../components/Inventory/Inventory";
 
-const InventoryPage = (props) => {
+const InventoryPage = (props) => {    
 
     const updateInventoryHandler = (updatedInventory) => {
         props.onUpdate(updatedInventory);
@@ -9,7 +9,7 @@ const InventoryPage = (props) => {
 
     return ( 
         <Fragment>
-        <Inventory inventoryList={props.inventoryList} onUpdate={updateInventoryHandler} />
+        <Inventory inventoryList={props.inventoryList} imageLibrary={props.imageLibrary} onUpdate={updateInventoryHandler} />
         </Fragment>
     );
 };

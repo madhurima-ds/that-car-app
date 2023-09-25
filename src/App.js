@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { statusActions } from "./store/status";
+
 import Home from "../src/Pages/Home";
 import SearchAndFilter from "./Pages/SearchAndFilter";
 import Financing from "./Pages/Financing";
@@ -8,6 +11,7 @@ import InventoryPage from "./Pages/InventoryPage";
 import ErrorPage from "./Pages/ErrorPage";
 import DetailsPage from "./Pages/DetailsPage";
 import HelpCenter from "./Pages/HelpCenter";
+import Status from "./components/UI/Status";
 
 import classesCss from "./App.css";
 
@@ -19,10 +23,29 @@ import bmwBlue from "../src/assets/bmw-blue.png";
 import bmwGold from "../src/assets/bmw-gold.png";
 import audiWhite from "../src/assets/Audi-white.png";
 import audiGold from "../src/assets/audi-gold.png";
+import audiBlack from "../src/assets/blackAudi.png";
 import hondaCivic from "../src/assets/hondaCivic.png";
 import pageNotFound from "../src/assets/404.jpg";
 
 import Layout from "../src/components/Layout";
+
+const getImageLibrary = () => {
+  const library = new Map([
+    ["carTitleLogoPNG", { name:"Logo", image: carTitleLogoPNG}],
+    ["hondaAccord", { name: "Blue Honda Accord", image: hondaAccord}],
+    ["teslaModelS", { name: "Red Telsa Model S", image: teslaModelS}],
+    ["teslaWhite", { name: "White Telsa Model S", image: teslaWhite}],
+    ["bmwBlue", { name: "Blue BMW X3", image: bmwBlue}],
+    ["bmwGold", { name: "Gold BMW 3 Series", image: bmwGold}],
+    ["audiWhite", { name: "White Audi TT", image: audiWhite}],
+    ["audiGold", { name: "Gold Audi eTron", image: audiGold}],
+    ["hondaCivic", { name: "Red Honda Civic", image: hondaCivic}],
+    ["audiBlack", { name: "Black Audi TT", image: audiBlack}],
+    ["pageNotFound", { name: "No Image", image: pageNotFound}],
+  ]);
+
+  return library;
+};
 
 function App() {
   const companyName = "that car place";
@@ -62,98 +85,138 @@ function App() {
     },
   ];
 
-  const inventoryList = [
-    {
-      id: "1",
-      img: hondaAccord,
-      make: "Honda",
-      model: "Accord",
-      year: "2022",
-      type: "Long-range",
-      mileage: "35,000",
-      price: "37,999",
-      color: "blue",
-    },
-    {
-      id: "2",
-      img: teslaModelS,
-      make: "Tesla",
-      model: "Model S",
-      year: "2023",
-      type: "Electric",
-      mileage: "22,000",
-      price: "52,999",
-      color: "red",
-    },
-    {
-      id: "3",
-      img: teslaWhite,
-      make: "Tesla",
-      model: "Model S",
-      year: "2018",
-      type: "Electric",
-      mileage: "42,000",
-      price: "32,999",
-      color: "white",
-    },
-    {
-      id: "7",
-      img: bmwBlue,
-      make: "BMW",
-      model: "X3",
-      year: "2021",
-      type: "sDrive30i",
-      mileage: "2,000",
-      price: "45,999",
-      color: "blue",
-    },
-    {
-      id: "5",
-      img: bmwGold,
-      make: "BMW",
-      model: "3 Series",
-      year: "2023",
-      type: "328i Gran Turismo Xdrive",
-      mileage: "42,000",
-      price: "22,999",
-      color: "gold",
-    },
-    {
-      id: "6",
-      img: audiWhite,
-      make: "Audi",
-      model: "TT",
-      year: "2014",
-      type: "Quatro Premium",
-      mileage: "82,000",
-      price: "12,999",
-      color: "white",
-    },
-    {
-      id: "4",
-      img: audiGold,
-      make: "Audi",
-      model: "eTron",
-      year: "2023",
-      type: "Chronos",
-      mileage: "34,500",
-      price: "62,999",
-      color: "gold",
-    },
-    {
-      id: "8",
-      img: hondaCivic,
-      make: "Honda",
-      model: "Civic",
-      year: "2023",
-      type: "Sedan LX",
-      mileage: "1000",
-      price: "25,045",
-      color: "red",
-    },
-  ];
+  // const inventoryList = [
+  //   {
+  //     id: "1",
+  //     img: hondaAccord,
+  //     make: "Honda",
+  //     model: "Accord",
+  //     year: "2022",
+  //     type: "Long-range",
+  //     mileage: "35,000",
+  //     price: "37,999",
+  //     color: "blue",
+  //   },
+  //   {
+  //     id: "2",
+  //     img: teslaModelS,
+  //     make: "Tesla",
+  //     model: "Model S",
+  //     year: "2023",
+  //     type: "Electric",
+  //     mileage: "22,000",
+  //     price: "52,999",
+  //     color: "red",
+  //   },
+  //   {
+  //     id: "3",
+  //     img: teslaWhite,
+  //     make: "Tesla",
+  //     model: "Model S",
+  //     year: "2018",
+  //     type: "Electric",
+  //     mileage: "42,000",
+  //     price: "32,999",
+  //     color: "white",
+  //   },
+  //   {
+  //     id: "7",
+  //     img: bmwBlue,
+  //     make: "BMW",
+  //     model: "X3",
+  //     year: "2021",
+  //     type: "sDrive30i",
+  //     mileage: "2,000",
+  //     price: "45,999",
+  //     color: "blue",
+  //   },
+  //   {
+  //     id: "5",
+  //     img: bmwGold,
+  //     make: "BMW",
+  //     model: "3 Series",
+  //     year: "2023",
+  //     type: "328i Gran Turismo Xdrive",
+  //     mileage: "42,000",
+  //     price: "22,999",
+  //     color: "gold",
+  //   },
+  //   {
+  //     id: "6",
+  //     img: audiWhite,
+  //     make: "Audi",
+  //     model: "TT",
+  //     year: "2014",
+  //     type: "Quatro Premium",
+  //     mileage: "82,000",
+  //     price: "12,999",
+  //     color: "white",
+  //   },
+  //   {
+  //     id: "4",
+  //     img: audiGold,
+  //     make: "Audi",
+  //     model: "eTron",
+  //     year: "2023",
+  //     type: "Chronos",
+  //     mileage: "34,500",
+  //     price: "62,999",
+  //     color: "gold",
+  //   },
+  //   {
+  //     id: "8",
+  //     img: hondaCivic,
+  //     make: "Honda",
+  //     model: "Civic",
+  //     year: "2023",
+  //     type: "Sedan LX",
+  //     mileage: "1000",
+  //     price: "25,045",
+  //     color: "red",
+  //   },
+  // ];
 
-  const [inventory, setInventory] = useState(inventoryList);
+  const isBusy = useSelector(state => state.status.isBusy);
+  const serverURL = useSelector(state => state.env.serverURL);
+
+  const dispatch = useDispatch();
+
+  const [error, setError] = useState(null);
+  const [inventory, setInventory] = useState([]);
+
+  const imageLibrary = useMemo(() => getImageLibrary(), []);
+
+  const loadInventoryHandler = useCallback(async () => {
+    const url = serverURL + "/v1/vehicles";
+
+    dispatch(statusActions.showStatus("Loading..."));
+    setError(null);
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Unable to retrieve vehicle inventory");
+      }
+      const data = await response.json();
+
+      const loadedInventory = [];
+      data.vehicles.forEach((element) => {
+        element.img = imageLibrary.get(element.imgName).image;
+        loadedInventory.push(element);
+      });
+
+      setInventory(loadedInventory);
+    } catch (error) {
+      setError(error.message);
+      console.log("Error occurred: " + error.message);
+    }
+    dispatch(statusActions.hideStatus());
+
+  }, [imageLibrary]);
+
+  useEffect(() => {
+    loadInventoryHandler();
+  }, [loadInventoryHandler]);
 
   const updateInventoryHandler = (updatedInventory) => {
     console.log(updatedInventory);
@@ -210,13 +273,9 @@ function App() {
           element: (
             <InventoryPage
               inventoryList={inventory}
+              imageLibrary={imageLibrary}
               onUpdate={updateInventoryHandler}
             ></InventoryPage>
-            // <Inventory
-            //   onUpdate={updateInventoryHandler}
-            //   carTitle={companyName}
-            //   inventoryList={inventory}
-            // />
           ),
         },
         {
@@ -225,8 +284,13 @@ function App() {
         },
       ],
     },
-  ]);
-  return <RouterProvider router={router} />;
+  ]);  
+  return (
+    <>
+    <RouterProvider router={router} />
+    { isBusy && <Status />}
+    </>
+  );  
 }
 
 export default App;

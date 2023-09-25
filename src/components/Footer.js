@@ -12,11 +12,11 @@ const Footer = () => {
                 <li>Careers</li>
                 <li>Our certification process</li>
                 </ul>
-                <text>Copyright © 2023 that car place. All Rights Reserved. </text>
+                <span>Copyright © 2023 that car place. All Rights Reserved. </span>
                 <br/>
-                <text>User Agreement | Financial and Other Privacy Notices |</text>
+                <span>User Agreement | Financial and Other Privacy Notices |</span>
                 <br/> 
-                <text>Do Not Sell My Info | Code of Conduct | Responsible Disclosure | Accessibility</text>
+                <span>Do Not Sell My Info | Code of Conduct | Responsible Disclosure | Accessibility</span>
         </div>
     );
 }

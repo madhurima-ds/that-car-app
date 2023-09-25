@@ -1,20 +1,4 @@
-.table-view {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    max-height: 25rem;
-    overflow: auto;    
-    border-style: solid;
-    border-color: midnightblue;
-}
-
 #resp-table {
     width: 100%;    
     display: table;    
-}
-
-#resp-table-caption {
-    display: table-caption;
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
 }
